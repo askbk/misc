@@ -13,23 +13,28 @@ moves = ['r', 'p', 's']
 
 def main():
     global movesFreq, humanMoves, counter, moves
+    rounds = 10000
     hPoints, cPoints = 0, 0
 
-    while True:
-        hMove = str(input("ur input ;): "))
+    for i in range(0, rounds):
+        hMove = str(input())
 
         cMove = nextMove()
+
+        print(cMove)
         
         if counter[cMove] == hMove:
             hPoints += 1
         elif counter[hMove] == cMove:
             cPoints += 1
         
-        outUpdate(hMove, cMove, hPoints, cPoints)   #print standings
+        #outUpdate(hMove, cMove, hPoints, cPoints)   #print standings
         
-        updatePredictions();
-
-        humanMoves = humanMoves[:3] + hMove
+        if len(humanMoves) > 3:
+            updatePredictions();
+            humanMoves = humanMoves[1:] + hMove
+        else:
+            humanMoves += hMove
 
 def outUpdate(hMove, cMove, hPoints, cPoints):
     print("you played ", hMove, ", computer played ", cMove, ". human: ", hPoints, " computer: ", cPoints, "\n")
@@ -39,22 +44,26 @@ def updatePredictions():
         movesFreq[humanMoves] += 1
     else:
         movesFreq[humanMoves] = 1
-    
 
 def nextMove():
     if len(humanMoves) < 4:
         return moves[randint(0, 2)]
     else:
-        maxFreq = humanMoves[:3] #the most frequently used 4 consecutive moves
+        maxFreq = 0 #the most frequently used 4 consecutive moves
+        maxMoves = ""
 
         for a in moves:
-            temp = maxFreq + a
+            temp = humanMoves[:3] + a
 
             if temp in movesFreq:
 
-                if movesFreq[temp] > movesFreq[maxFreq]:
-                    maxFreq = temp + ""
-
-        return maxFreq[3]
+                if movesFreq[temp] > maxFreq:
+                    maxMoves = temp + ""
+                    maxFreq = movesFreq[temp]
+        
+        if maxMoves not in movesFreq or maxMoves == "":
+            return moves[randint(0, 2)]
+        else:
+            return counter[maxMoves[3]]
 
 main()
