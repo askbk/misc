@@ -1,3 +1,13 @@
+# this opponent uses the following strategy:
+# 
+#	1.	play a random move the first round
+#	2.	if it wins:
+#			next move is whatever the human played last
+#		if it loses:
+#			next move is the move that wasn't played this round
+#		if it's a draw:
+#			next move is random
+
 from random import *
 
 counter = {
@@ -10,8 +20,8 @@ def main():
     global counter, moves
     oppPoints, cPoints, result = 0, 0, 0
     oppMove = ""
-
-    print("p1\tp2\t\tp1\tp2")
+    print("moves\t\t\tscores");
+    print("comp\tyou\t\tcomp\tyou");
 
     while True:
 
