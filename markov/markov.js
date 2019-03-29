@@ -16,6 +16,7 @@ export class MarkovChain {
     }
 
     next(v) {
+        // console.log(v);
         const transitionCount = this.states[v].length;
         const n =  Math.floor(Math.random() * transitionCount);
 
@@ -52,9 +53,9 @@ export class TextGenerator {
 
             this.markovChain.addTransition(currState, this.inputText[0]);
 
-            console.log(this.markovChain);
             return;
         }
+
         for (let i = k; i < this.inputText.length; i++) {
             currState = this.inputText.substring(i - k, i);
 
@@ -66,9 +67,7 @@ export class TextGenerator {
 
     print(M = 30) {
         const startN = Math.floor(Math.random() * Object.keys(this.markovChain.states).length);
-
-        // let prevState = Object.keys(this.markovChain)[startN];
-        let prevState = "HEYAHSTART";
+        let prevState = Object.keys(this.markovChain.states)[startN];
         let outputText = "";
 
         for (let i = 0; i < M; i++) {
