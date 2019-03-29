@@ -1,14 +1,6 @@
 import { MarkovChain, TextGenerator } from './markov.js';
 import { stalin } from './inputTexts.js';
 
-function newMarkov(text, wordMode = false, k = 3, M = 200) {
-    const mark = new TextGenerator(text, wordMode);
-
-    mark.build(k);
-
-    console.log(mark.generate(M));
-}
-
 // newMarkov(`Microsoft said Tuesday the company would comply with a preliminary ruling by Federal District Court Judge Ronald H. Whyte that Microsoft is no longer able to use the Java Compatibility Logo on its packaging and websites for Internet Explorer and Software Developers Kit for Java. "We remain confident that once all the facts are presented in the larger case, the court will find Microsoft to be in full compliance with its contract with Sun," stated Tom Burt, Associate General Counsel for Microsoft Corporation. "We are disappointed with this decision, but we will immediately comply with the Court's order." Microsoft has been in the forefront of helping developers use the Java programming language to write cutting-edge applications. The company has committed significant resources so that Java developers have the option of taking advantage of Windows features when writing software using the Java language. Providing the best tools and programming options will continue to be Microsoft's goal. "We will continue to listen to our customers and provide them the tools they need to write great software using the Java language," added Tod Nielsen, General Manager for Microsoft's Developer Relations Group/Platform Marketing.`, true);
 
 // newMarkov(`Han ble etter Möngkes død i 1259 mongolenes kaghan, og hans rike strakte seg fra Nord-Kina i øst til Russland og Persia i vest. I de første årene hadde han sin residens i Karakorum, en telt/jurtby vest i Mongolia. Siden grunnla han i 1264–1267 en ny residens i Jenking (dagens Beijing, på mongolsk Khanbaliq (eldre transkripsjon Kanbaluk), «khanens by», og som Marco Polo oppfattet som Cumbuluk). Hans sommerhovedstad, Xanadu, ble omspunnet i myter for sin prakt.
@@ -21,4 +13,17 @@ function newMarkov(text, wordMode = false, k = 3, M = 200) {
 //
 // Kublai-khan bygde i 1272 Trommetårnet i Beijing. Dette ble restaurert under Ming-dynastiet og fikk da sitt nåværende utseende. Kublai Khan grunnla også Konfuciustempelet i Beijing som senere ble bygd om av Kublai-khans sønnesønn.`)
 
-newMarkov(stalin, true);
+// newMarkov(stalin, true);
+
+const text = document.getElementById("inputText"),
+    k = document.getElementById("k"),
+    M = document.getElementById("M"),
+    output = document.getElementById("outputContainer");
+
+document.getElementById("generateButton").addEventListener("click", () => {
+    const mark = new TextGenerator(text.value, false);
+
+    mark.build(k.value);
+
+    output.innerHTML = mark.generate(M.value);
+});

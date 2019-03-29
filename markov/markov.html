@@ -2,14 +2,22 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title></title>
+        <title>Markov Chain text generator</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     </head>
     <body>
+        <div class="w3-content">
+            <form>
+                <textarea name="inputText" rows="8" cols="80" id="inputText"></textarea>
+                <input type="number" name="" value="3" id="k">
+                <input type="number" name="" value="300" id="M">
+                <button type="button" name="generateButton" id="generateButton">Generate</button>
+            </form>
 
+            <p id="outputContainer" class="w3-container"></p>
+        </div>
     </body>
 
     <script src="main.js" type="module" charset="utf-8"></script>
-    <script type="text/javascript">
-
-    </script>
 </html>
